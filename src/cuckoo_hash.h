@@ -155,6 +155,10 @@ struct cuckoo_hash_item *
 cuckoo_hash_next(const struct cuckoo_hash *hash,
                  const struct cuckoo_hash_item *hash_item);
 
+struct cuckoo_hash_item *
+cuckoo_hash_next_with_empty(const struct cuckoo_hash *hash,
+                 const struct cuckoo_hash_item *hash_item);
+
 
 /*
   cuckoo_hash_each(it, hash):
