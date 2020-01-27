@@ -426,3 +426,21 @@ cuckoo_hash_next(const struct cuckoo_hash *hash,
 
   return NULL;
 }
+
+struct cuckoo_hash_item *
+cuckoo_hash_next_with_empty(const struct cuckoo_hash *hash,
+                            const struct cuckoo_hash_item *hash_item)
+{
+    struct _cuckoo_hash_elem *elem =
+            (hash_item != NULL
+             ? ((struct _cuckoo_hash_elem *)
+    ((char *) hash_item - offsetof(struct _cuckoo_hash_elem, hash_item))
+    + 1)
+    : hash->table);
+
+    uint32_t bin_count = 1U << hash->power;
+    struct _cuckoo_hash_elem *end = bin_at(hash, bin_count);
+    uint32_t mask = bin_count - 1;
+    if (elem == end) return NULL;
+    else return elem;
+}

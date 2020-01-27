@@ -191,6 +191,10 @@ cuckoo_hash_next(const struct cuckoo_hash *hash,
   (it) != NULL;                                 \
   (it) = cuckoo_hash_next((hash), (it))
 
+#define cuckoo_hash_each_with_empty(it, hash)              \
+  (it) = cuckoo_hash_next_with_empty((hash), NULL);        \
+  (it) != NULL;                                 \
+  (it) = cuckoo_hash_next_with_empty((hash), (it))
 
 #ifdef __cplusplus
 }      /* extern "C" */
